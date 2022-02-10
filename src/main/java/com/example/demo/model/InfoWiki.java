@@ -30,7 +30,7 @@ public class InfoWiki {
 	@Column (name="imagen", nullable = false)
 	private String imagen;
 	
-	@Column(name = "Informacion", nullable = false, length = 1000)
+	@Column(name = "Informacion", nullable = false, length = 5000)
 	private String informacion;
 	
 	
