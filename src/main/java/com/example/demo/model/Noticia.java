@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,17 +32,44 @@ public class Noticia {
 	private Long idNoticia;
 	@Column(name="titular", nullable = false)
 	private String titular;
-	@Column(name="autor", nullable = false)
-	private String autor;
-	@Column(name="cuerpo", nullable = false)
-	private String cuerpoNoticia;
-	@Column(name="fecha", nullable = false)
-	private LocalDate fecha;
+	@Column(name="imagen", nullable = false)
+	private String imagen;
+	@Column(name="url", nullable = false)
+	private String url;
 	
-	public Noticia(String titular, String autor, String cuerpoNoticia, LocalDate fecha) {
+	public Noticia(String imagen,String titular, String url) {
+		this.imagen = imagen;
 		this.titular = titular;
-		this.autor = autor;
-		this.cuerpoNoticia = cuerpoNoticia;
-		this.fecha = fecha;
+		this.url = url;
 	}
+	
+	public Noticia() {
+		
+	}
+
+	public String getTitular() {
+		return titular;
+	}
+
+	public void setTitular(String titular) {
+		this.titular = titular;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 }

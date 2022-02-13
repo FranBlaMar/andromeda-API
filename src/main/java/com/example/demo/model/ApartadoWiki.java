@@ -37,7 +37,30 @@ public class ApartadoWiki {
 	@OneToMany (cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<InfoWiki> informacion;
 
+	
+	
+	
 	public ApartadoWiki (String nombreApartado) {
 		this.nombreApartado = nombreApartado;
 	}
+	public ApartadoWiki() {
+	}
+	
+	
+
+	public String getNombreApartado() {
+		return nombreApartado;
+	}
+	public void setNombreApartado(String nombreApartado) {
+		this.nombreApartado = nombreApartado;
+	}
+	public List<InfoWiki> getInformacion() {
+		return informacion;
+	}
+
+	public void setInformacion(List<InfoWiki> informacion) {
+		this.informacion = informacion;
+	}
+	
+	
 }

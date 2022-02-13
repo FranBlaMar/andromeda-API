@@ -40,4 +40,36 @@ public class InfoWiki {
 		this.imagen = imagen;
 	}
 
+	public InfoWiki() {
+		
+	}
+
+	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public void setNombreInfo(String nombreInfo) {
+		this.nombreInfo = nombreInfo;
+	}
+
+	public String getInformacion() {
+		return informacion;
+	}
+
+
+	public void setInformacion(String informacion) {
+		this.informacion = informacion;
+	}
+
+
+	public String getNombreInfo() {
+		return nombreInfo;
+	}
+	
+	
 }
