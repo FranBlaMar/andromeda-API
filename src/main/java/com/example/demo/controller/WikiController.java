@@ -13,11 +13,17 @@ import com.example.demo.model.ApartadoWiki;
 import com.example.demo.model.InfoWiki;
 import com.example.demo.service.WikiService;
 
+/**
+ * Controller donde gestionar las peticiones a la wiki
+ * @author usuario
+ *
+ */
+
 @RestController
 public class WikiController {
 
 	@Autowired
-	private WikiService servicioWiki;	
+	private WikiService service;	
 	
 	/**
 	 * Metodo para devolver todos los apartados 
@@ -25,7 +31,7 @@ public class WikiController {
 	 */
 	@GetMapping("/wiki")
 	public List<ApartadoWiki> findAllApartados(){
-		return this.servicioWiki.findAllApartados();
+		return this.service.findAllApartados();
 	}
 	
 	/**
@@ -35,11 +41,11 @@ public class WikiController {
 	 */
 	@GetMapping("/wiki/{nombreApartado}/informacion")
 	public List<InfoWiki> getInfoApartado(@PathVariable String nombreApartado){
-		ApartadoWiki apartado = this.servicioWiki.findApartadoByNombre(nombreApartado);
+		ApartadoWiki apartado = this.service.findApartadoByNombre(nombreApartado);
 		if(apartado == null) {
 			throw new ApartadoNotFoundException(nombreApartado);
 		}
-		return this.servicioWiki.findAllInfo(nombreApartado);
+		return this.service.findAllInfo(nombreApartado);
 	}
 	
 	
@@ -51,11 +57,11 @@ public class WikiController {
 	 */
 	@GetMapping("/wiki/{nombreApartado}/informacion/{nombreInfo}")
 	public InfoWiki getInfoDeApartadoPorNombre(@PathVariable String nombreApartado, @PathVariable String nombreInfo) {
-		ApartadoWiki apartado = this.servicioWiki.findApartadoByNombre(nombreApartado);
+		ApartadoWiki apartado = this.service.findApartadoByNombre(nombreApartado);
 		if(apartado == null) {
 			throw new ApartadoNotFoundException(nombreApartado);
 		}
-		InfoWiki info = this.servicioWiki.findInfoByNombre(nombreApartado, nombreInfo);
+		InfoWiki info = this.service.findInfoByNombre(nombreApartado, nombreInfo);
 		if(info == null) {
 			throw new InfoNotFoundException(nombreInfo);
 		}

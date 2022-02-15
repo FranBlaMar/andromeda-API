@@ -19,14 +19,14 @@ public class WikiService {
 
 	
 	@Autowired
-	private ApartadoWikiRepository repositorioApartado;
+	private ApartadoWikiRepository repository;
 	
 	/**
 	 * Metodo para devolver todos los apartados de la wiki que hay en la base de datos
 	 * @return Lista con todos los apartados
 	 */
 	public List<ApartadoWiki> findAllApartados(){
-		return this.repositorioApartado.findAll();
+		return this.repository.findAll();
 	}
 	
 	
@@ -35,7 +35,7 @@ public class WikiService {
 	 * @return Apartado que se ha buscado mediante el nombre
 	 */
 	public ApartadoWiki findApartadoByNombre(String nombreApartado) {
-		return this.repositorioApartado.findByNombre(nombreApartado).get(0);
+		return this.repository.findByNombre(nombreApartado).get(0);
 	}
 	
 
@@ -44,8 +44,8 @@ public class WikiService {
 	 * @return Lista con toda la info de un apartado
 	 */
 	public List<InfoWiki> findAllInfo(String nombreApartado){
-		ApartadoWiki apartado = this.repositorioApartado.findByNombre(nombreApartado).get(0);
-		return apartado.getInformacion();
+		ApartadoWiki apartado = this.repository.findByNombre(nombreApartado).get(0);
+		return apartado.getInfo();
 	}
 	
 	
@@ -56,14 +56,15 @@ public class WikiService {
 	 * @return La info que se ha buscado
 	 */
 	public InfoWiki findInfoByNombre(String nombreApartado, String nombreInfo) {
-		List<InfoWiki> infoDeApartado = findApartadoByNombre(nombreApartado).getInformacion();
+		List<InfoWiki> infoDeApartado = findApartadoByNombre(nombreApartado).getInfo();
 		InfoWiki resultado = null;
 		for(InfoWiki info : infoDeApartado) {
-			if (info.getNombreInfo().equals(nombreInfo)){
+			if (info.getNameInfo().equalsIgnoreCase(nombreInfo)){
 				resultado = info;
 			}
 		}
 		return resultado;
 	}
+	
 	
 }

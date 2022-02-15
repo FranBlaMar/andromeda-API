@@ -25,50 +25,19 @@ import lombok.ToString;
 public class InfoWiki {
 
 	@Id
-	private String nombreInfo;
+	private String nameInfo;
 	
 	@Column (name="imagen", nullable = false)
-	private String imagen;
+	private String image;
 	
 	@Column(name = "Informacion", nullable = false, length = 5000)
-	private String informacion;
+	private String info;
 	
 	
-	public InfoWiki (String nombreInfo, String informacion, String imagen) {
-		this.nombreInfo = nombreInfo;
-		this.informacion = informacion;
-		this.imagen = imagen;
-	}
-
-	public InfoWiki() {
-		
-	}
-
-	
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public void setNombreInfo(String nombreInfo) {
-		this.nombreInfo = nombreInfo;
-	}
-
-	public String getInformacion() {
-		return informacion;
-	}
-
-
-	public void setInformacion(String informacion) {
-		this.informacion = informacion;
-	}
-
-
-	public String getNombreInfo() {
-		return nombreInfo;
+	public InfoWiki (String nameInfo, String info, String image) {
+		this.nameInfo = nameInfo;
+		this.info = info;
+		this.image = image;
 	}
 	
 	

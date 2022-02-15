@@ -32,35 +32,16 @@ public class ApartadoWiki {
 	private Long IdApartado;
 	
 	@Column(name="nombreApartado", nullable = false)
-	private String nombreApartado;
+	private String name;
 	
 	@OneToMany (cascade=CascadeType.ALL, orphanRemoval = true)
-	private List<InfoWiki> informacion;
+	private List<InfoWiki> info;
 
 	
 	
 	
-	public ApartadoWiki (String nombreApartado) {
-		this.nombreApartado = nombreApartado;
+	public ApartadoWiki (String name) {
+		this.name = name;
 	}
-	public ApartadoWiki() {
-	}
-	
-	
-
-	public String getNombreApartado() {
-		return nombreApartado;
-	}
-	public void setNombreApartado(String nombreApartado) {
-		this.nombreApartado = nombreApartado;
-	}
-	public List<InfoWiki> getInformacion() {
-		return informacion;
-	}
-
-	public void setInformacion(List<InfoWiki> informacion) {
-		this.informacion = informacion;
-	}
-	
 	
 }

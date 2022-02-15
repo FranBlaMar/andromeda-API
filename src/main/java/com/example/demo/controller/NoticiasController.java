@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Noticia;
 import com.example.demo.service.NoticiaService;
 
+/**
+ * Clase controller donde gestionamos las peticiones de noticia
+ * @author usuario
+ *
+ */
 @RestController
 public class NoticiasController {
 
 	@Autowired
-	private NoticiaService servicioNoticia;
+	private NoticiaService servicie;
 	
 	
 	
@@ -23,7 +28,7 @@ public class NoticiasController {
 	 */
 	@GetMapping("/noticia")
 	public List<Noticia> findAll(){
-		return this.servicioNoticia.findAll();
+		return this.servicie.findAll();
 	}
 	
 	/**
@@ -32,7 +37,7 @@ public class NoticiasController {
 	 */
 	@GetMapping("/noticia/{idNoticia}")
 	public Noticia findAllById(@PathVariable Long idNoticia){
-		return this.servicioNoticia.findById(idNoticia);
+		return this.servicie.findById(idNoticia);
 	}
 	
 }

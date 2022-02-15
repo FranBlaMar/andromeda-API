@@ -17,7 +17,7 @@ import com.example.demo.repository.NoticiaRepository;
 public class NoticiaService {
 
 	@Autowired
-	private NoticiaRepository repositorio;
+	private NoticiaRepository repository;
 	
 	
 	
@@ -27,7 +27,7 @@ public class NoticiaService {
 	 * @return Lista con las noticias de la base de datos
 	 */
 	public List<Noticia> findAll(){
-		return this.repositorio.findAll();
+		return this.repository.findAll();
 	}
 	
 	
@@ -37,7 +37,7 @@ public class NoticiaService {
 	 * @return La noticia obtenida mediante el id
 	 */
 	public Noticia findById(Long idNoticia){
-		return this.repositorio.findById(idNoticia).get();
+		return this.repository.findById(idNoticia).get();
 	}
 	
 	

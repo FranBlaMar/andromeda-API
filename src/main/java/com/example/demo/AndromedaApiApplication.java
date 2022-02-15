@@ -28,7 +28,7 @@ public class AndromedaApiApplication {
 			List<InfoWiki> infoPlanetas = Arrays.asList(
 					new InfoWiki("Planetas","Un planeta es un cuerpo celeste sin luz propia y de forma esférica que gira sobre sí mismo y comúnmente alrededor de una "
 							+ "estrella (existen planetas sin Soles). Otra importante característica de un planeta, es su gravedad para “limpiar” o despejar su área "
-							+ "circundante de objetos que se mantengan cercanos a su órbita de traslación." ,"https://drive.google.com/file/d/1atX4WR34h7ffVjTk1fCTIkhvu-mdrMN5/view?usp=sharing"),
+							+ "circundante de objetos que se mantengan cercanos a su órbita de traslación." ,"http://drive.google.com/uc?export=view&id=12TlGu4mxBFH0GfqO0VZ8OlFEhk14ftHb"),
 					new InfoWiki("mercurio", "Es el más cercano al Sol, a parte de ser el más pequeño de sus homólogos. Tiene parecido con la Tierra, "
 							+ "ya que se compone de un 70% de elementos metálicos y un 30% restante de silicatos. Además, al igual que la Luna, Mercurio "
 							+ "presenta una gran cantidad de crateres generados por el impacto de meteoritos. Mercurio cuenta con terrenos escarpados y lisos, así como acantilados, "
@@ -119,13 +119,13 @@ public class AndromedaApiApplication {
 							+ " la superficie. Este viaje dura más de un millón de años.", "https://drive.google.com/uc?export=view&id=1Fd9HBdNuKC0jmXdN33pPMg-UwmSuuC37")	
 					);
 					ApartadoWiki planetas = new ApartadoWiki("Planetas");
-					planetas.setInformacion(infoPlanetas);
+					planetas.setInfo(infoPlanetas);
 					ApartadoWiki galaxias = new ApartadoWiki("Galaxias");
-					galaxias.setInformacion(infoGalaxias);
+					galaxias.setInfo(infoGalaxias);
 					ApartadoWiki satelites = new ApartadoWiki("Satélites");
-					satelites.setInformacion(infoSatelites);
+					satelites.setInfo(infoSatelites);
 					ApartadoWiki estrellas = new ApartadoWiki("Estrellas");
-					estrellas.setInformacion(infoEstrellas);
+					estrellas.setInfo(infoEstrellas);
 			repositorioApartado.saveAll( Arrays.asList(planetas, galaxias, satelites, estrellas));
 					Noticia not1 = new Noticia ("https://drive.google.com/uc?export=view&id=1CUtuqaEO2PKYLM2-oWuWToTOSo6snqQn","¿Cuándo podremos anunciar el hallazgo de vida extraterrestre?","https://elpais.com/ciencia/vacio-cosmico/2022-02-09/cuando-podremos-anunciar-el-hallazgo-de-vida-extraterrestre.html");
 					Noticia not2 = new Noticia ("https://drive.google.com/uc?export=view&id=1Dcblln1UWW0504tkOsNLFKkfpY4aohRZ","El rover ‘Curiosity’ no ha encontrado vida en Marte, pero eso hay que demostrarlo","https://elpais.com/ciencia/2022-02-08/el-rover-curiosity-no-ha-encontrado-vida-en-marte-pero-eso-hay-que-demostrarlo.html");
