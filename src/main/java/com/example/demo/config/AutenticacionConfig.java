@@ -32,6 +32,7 @@ public class AutenticacionConfig extends WebSecurityConfigurerAdapter {
                 .authorizeHttpRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/foro/**").hasRole("USER")
                 .and()
                 .userDetailsService(servicio)
                 .exceptionHandling()

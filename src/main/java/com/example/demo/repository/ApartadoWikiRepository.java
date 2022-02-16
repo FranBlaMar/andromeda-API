@@ -10,7 +10,7 @@ import com.example.demo.model.ApartadoWiki;
 public interface ApartadoWikiRepository extends JpaRepository<ApartadoWiki, Long>{
 
 	
-	@Query("SELECT a FROM ApartadoWiki a WHERE  nombreApartado=:nombre")
+	@Query("SELECT a FROM ApartadoWiki a WHERE  name=:nombre")
 	public List<ApartadoWiki> findByNombre(String nombre);
 	
 }

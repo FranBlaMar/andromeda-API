@@ -29,7 +29,7 @@ public class ApartadoWiki {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long IdApartado;
+	private Long idApartado;
 	
 	@Column(name="nombreApartado", nullable = false)
 	private String name;
