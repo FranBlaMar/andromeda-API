@@ -3,27 +3,34 @@ package com.example.demo;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.model.ApartadoWiki;
 import com.example.demo.model.InfoWiki;
 import com.example.demo.model.Noticia;
+import com.example.demo.model.User;
 import com.example.demo.repository.ApartadoWikiRepository;
 import com.example.demo.repository.NoticiaRepository;
+import com.example.demo.repository.UserRepository;
 
 @SpringBootApplication
 public class AndromedaApiApplication {
 
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(AndromedaApiApplication.class, args);
 	}
 
 	
 	@Bean
-	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia) {
+	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia, UserRepository repositorioUsuario) {
 		return args -> {
 			List<InfoWiki> infoPlanetas = Arrays.asList(
 					new InfoWiki("Planetas","Un planeta es un cuerpo celeste sin luz propia y de forma esférica que gira sobre sí mismo y comúnmente alrededor de una "
@@ -134,6 +141,12 @@ public class AndromedaApiApplication {
 					Noticia not5 = new Noticia ("https://drive.google.com/uc?export=view&id=12w4C0-XCDv_yMlPan6LB9ClMuTx5bcK6","Viajar a la Luna de nuevo en 2022: la NASA y otras empresas privadas ya preparan a sus astronautas","https://www.20minutos.es/noticia/4953606/0/viajar-luna-2022-nasa-empresas-privadas-astronautas/?autoref=true");
 					Noticia not6 = new Noticia ("https://drive.google.com/uc?export=view&id=1NNbprixsm9suOzS1l_ILTH3F3_F5J1rl","El origen de las moléculas de un meteorito marciano hallado en la Antártida no es biológico","https://www.20minutos.es/noticia/4940738/0/origen-moleculas-meteorito-marte-antartida-biologico/");
 			repositorioNoticia.saveAll(Arrays.asList(not1,not2,not3,not4,not5,not6));
+			
+			User us1 = new User("F123",encoder.encode("11111111"), "fran@host.com", "Fran", "Dueño de la página");
+			User us2 = new User("J123",encoder.encode("11111111"), "jorge@host.com", "Jorge", "Profesor de entorno servidor");
+			User us3 = new User("A123",encoder.encode("11111111"), "anda@host.com", "Ana", "Desarrolladora java interesada en astronomía");
+			repositorioUsuario.saveAll(Arrays.asList(us1,us2,us3));
+			
 		};
 	}
 }

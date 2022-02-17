@@ -43,7 +43,7 @@ public class UserController {
 	        String encodedPass = passwordEncoder.encode(user.getPassword());
 	        user.setPassword(encodedPass);
 	        user = repository.save(user);
-	        String token = jwtUtil.generateToken(user.getEmail());
+	        String token = jwtUtil.generateToken(user.getUserName());
 	        return Collections.singletonMap("jwt-token", token);
 	    }
 
@@ -56,8 +56,8 @@ public class UserController {
 	    public Map<String, Object> loginHandler(@RequestBody UserLogin userLogin){
 	        try {
 	            UsernamePasswordAuthenticationToken authInputToken =
-	                    new UsernamePasswordAuthenticationToken(userLogin.getUserName(), userLogin.getPassword());
-
+	            new UsernamePasswordAuthenticationToken(userLogin.getUserName(), userLogin.getPassword());
+	            System.out.println(userLogin);
 	            authManager.authenticate(authInputToken);
 
 	            String token = jwtUtil.generateToken(userLogin.getUserName());
@@ -78,6 +78,5 @@ public class UserController {
 	        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        return repository.findById(userName).get();
 	    }
-
-	    
+    
 }
