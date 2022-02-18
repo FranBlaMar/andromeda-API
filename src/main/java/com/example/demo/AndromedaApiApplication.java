@@ -142,7 +142,7 @@ public class AndromedaApiApplication {
 					Noticia not6 = new Noticia ("https://drive.google.com/uc?export=view&id=1NNbprixsm9suOzS1l_ILTH3F3_F5J1rl","El origen de las moléculas de un meteorito marciano hallado en la Antártida no es biológico","https://www.20minutos.es/noticia/4940738/0/origen-moleculas-meteorito-marte-antartida-biologico/");
 			repositorioNoticia.saveAll(Arrays.asList(not1,not2,not3,not4,not5,not6));
 			
-			User us1 = new User("F123",encoder.encode("11111111"), "fran@host.com", "Fran", "Dueño de la página");
+			User us1 = new User("F123",encoder.encode("123"), "fran@host.com", "Fran", "Dueño de la página");
 			User us2 = new User("J123",encoder.encode("11111111"), "jorge@host.com", "Jorge", "Profesor de entorno servidor");
 			User us3 = new User("A123",encoder.encode("11111111"), "anda@host.com", "Ana", "Desarrolladora java interesada en astronomía");
 			repositorioUsuario.saveAll(Arrays.asList(us1,us2,us3));

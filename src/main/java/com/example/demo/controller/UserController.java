@@ -44,7 +44,7 @@ public class UserController {
 	        user.setPassword(encodedPass);
 	        user = repository.save(user);
 	        String token = jwtUtil.generateToken(user.getUserName());
-	        return Collections.singletonMap("jwt-token", token);
+	        return Collections.singletonMap("jwt_token", token);
 	    }
 
 	    /**
@@ -62,9 +62,9 @@ public class UserController {
 
 	            String token = jwtUtil.generateToken(userLogin.getUserName());
 
-	            return Collections.singletonMap("jwt-token", token);
+	            return Collections.singletonMap("jwt_token", token);
 	        }catch (AuthenticationException authExc){
-	            throw new RuntimeException("Usuario incorrecto");
+	            throw new RuntimeException("Usuario o contraseña incorrectos");
 	        }
 	    }
 	    
