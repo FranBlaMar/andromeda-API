@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.example.demo.service.DetallesUsuarioService;
+import com.example.demo.service.UsuarioService;
 import com.example.demo.security.FiltroJWT;
 
 @Configuration
@@ -21,7 +21,7 @@ import com.example.demo.security.FiltroJWT;
 public class AutenticacionConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private FiltroJWT filtro;
-    @Autowired private DetallesUsuarioService servicio;
+    @Autowired private UsuarioService servicio;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,6 +38,7 @@ public class AutenticacionConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                     .authenticationEntryPoint(
                             (request, response, authException) ->
+                            
                                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
                     )
                 .and()

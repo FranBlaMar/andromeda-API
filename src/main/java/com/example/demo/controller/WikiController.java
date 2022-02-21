@@ -1,13 +1,18 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.error.ApartadoNotFoundException;
+import com.example.demo.error.ErroresManager;
 import com.example.demo.error.InfoNotFoundException;
 import com.example.demo.model.ApartadoWiki;
 import com.example.demo.model.InfoWiki;
@@ -68,4 +73,17 @@ public class WikiController {
 		return info;
 	}
 	
+	/**
+	 * Metodo handler de exception de informacion no encontrada
+	 * @param ex excepción lanzada
+	 * @return la excepción modificada por nosotros
+	 */
+	 @ExceptionHandler(InfoNotFoundException.class)
+		public ResponseEntity<ErroresManager> handleUsuarioNoEncontrado(InfoNotFoundException ex) {
+			ErroresManager apiError = new ErroresManager();
+			apiError.setEstadoPeticion(HttpStatus.NOT_FOUND);
+			apiError.setFecha(LocalDateTime.now());
+			apiError.setMensajeDeError(ex.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+	}
 }

@@ -15,7 +15,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
 @Component
-public class DetallesUsuarioService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService {
 
     @Autowired private UserRepository repositorio;
 
@@ -23,11 +23,20 @@ public class DetallesUsuarioService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> userRes = repositorio.findById(userName);
         if(userRes.isEmpty())
-            throw new UsernameNotFoundException("No se pudo encontrar un usuario con el user name " + userName);
+            throw new UsernameNotFoundException("No se pudo encontrar un usuario con el nombre de usuario " + userName);
         User user = userRes.get();
         return new org.springframework.security.core.userdetails.User(
                 userName,
                 user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+    }
+    
+    /**
+     * Metodo para modificar un usuario
+     * @param usuarioModificado
+     * @return El usuario modificado
+     */
+    public User editUsuario(User usuarioModificado) {
+    	return this.repositorio.save(usuarioModificado);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.demo.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.demo.service.DetallesUsuarioService;
+import com.example.demo.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 public class FiltroJWT extends OncePerRequestFilter {
 
-    @Autowired private DetallesUsuarioService servicio;
+    @Autowired private UsuarioService servicio;
     @Autowired private UtilJWT jwtUtil;
 
     @Override
@@ -30,7 +30,7 @@ public class FiltroJWT extends OncePerRequestFilter {
         if(authHeader != null && !authHeader.isBlank() && authHeader.startsWith("Bearer ")){
             String jwt = authHeader.substring(7);
             if(jwt == null || jwt.isBlank()){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT Token in Bearer Header");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Token inválido");
             }else {
                 try{
                     String userName = jwtUtil.validateTokenAndRetrieveSubject(jwt);
@@ -41,7 +41,7 @@ public class FiltroJWT extends OncePerRequestFilter {
                         SecurityContextHolder.getContext().setAuthentication(authToken);
                     }
                 }catch(JWTVerificationException exc){
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT Token");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Token inválido");
                 }
             }
         }
