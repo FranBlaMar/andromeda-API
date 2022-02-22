@@ -59,8 +59,8 @@ public class UserController {
 	     */
 	    @PostMapping("/auth/register")
 	    public Map<String, Object> registerHandler(@RequestBody User user) throws UsuarioExistenteException{
-	    	User verificar = this.repository.findById(user.getUserName()).get();
-	    	if(verificar.getUserName().equals(user.getUserName())) {
+	    	User verificar = this.repository.findById(user.getUserName()).orElse(null);
+	    	if(verificar != null) {
 	    		throw new UsuarioExistenteException();
 	    	}
 	        String encodedPass = passwordEncoder.encode(user.getPassword());
@@ -123,8 +123,7 @@ public class UserController {
 	     * @return El usuario al que pertenece el token de la cabecera de la petición
 	     */
 	    @GetMapping("/user")
-	    public User getUser(){
-	    	
+	    public User getUser(){ 	
 	        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        return repository.findById(userName).get();
 	    }

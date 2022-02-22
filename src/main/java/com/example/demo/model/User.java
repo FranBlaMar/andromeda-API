@@ -41,12 +41,20 @@ public class User {
 	@Column (name="descripcion")
 	private String aboutMe;
 	
+	@Column (name="numero_de_posts")
+	private Integer numberOfPosts;
+	
+	@Column (name="numero_de_comentarios")
+	private Integer numberOfComents;
+	
 	public User(String userName,String password, String email, String name, String aboutMe){
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
 		this.name = name;
 		this.aboutMe = aboutMe;
+		this.numberOfPosts = 0;
+		this.numberOfComents = 0;
 	}
 	
 }
