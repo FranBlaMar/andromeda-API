@@ -133,7 +133,7 @@ public class UserController {
 	     * @param userModificar Usuario con los nuevos datos
 	     * @return El usuario modificado
 	     */
-	    @PutMapping("/user/{userName}")
+	    @PutMapping("/user")
 	    public User putUser(@RequestBody User userModificar){
 	        return this.servicioUser.editUsuario(userModificar);
 	    }

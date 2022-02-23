@@ -37,6 +37,9 @@ public class UsuarioService implements UserDetailsService {
      * @return El usuario modificado
      */
     public User editUsuario(User usuarioModificado) {
+    	User usuario = this.repositorio.findById(usuarioModificado.getUserName()).get();
+    	usuarioModificado.setPassword(usuario.getPassword());
+    	System.out.println(usuarioModificado);
     	return this.repositorio.save(usuarioModificado);
     }
 }
