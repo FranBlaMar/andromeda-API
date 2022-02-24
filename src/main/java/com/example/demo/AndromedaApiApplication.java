@@ -13,9 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.demo.model.ApartadoWiki;
 import com.example.demo.model.InfoWiki;
 import com.example.demo.model.Noticia;
+import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import com.example.demo.repository.ApartadoWikiRepository;
 import com.example.demo.repository.NoticiaRepository;
+import com.example.demo.repository.PostRepository;
 import com.example.demo.repository.UserRepository;
 
 @SpringBootApplication
@@ -30,7 +32,7 @@ public class AndromedaApiApplication {
 
 	
 	@Bean
-	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia, UserRepository repositorioUsuario) {
+	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia, UserRepository repositorioUsuario, PostRepository repositorioPost) {
 		return args -> {
 			List<InfoWiki> infoPlanetas = Arrays.asList(
 					new InfoWiki("Planetas","Un planeta es un cuerpo celeste sin luz propia y de forma esférica que gira sobre sí mismo y comúnmente alrededor de una "
@@ -143,10 +145,34 @@ public class AndromedaApiApplication {
 			repositorioNoticia.saveAll(Arrays.asList(not1,not2,not3,not4,not5,not6));
 			
 			User us1 = new User("F123",encoder.encode("123"), "fran@host.com", "Fran", "Dueño de la página a jornada completa. Si necesitas ayuda contacta conmigo mediante el formulario de contacto. Agradecería que se me informe sobre bugs en la página para solventarlos lo antes posible. ");
+			us1.setNumberOfPosts(2);
 			User us2 = new User("J123",encoder.encode("11111111"), "jorge@host.com", "Jorge", "Profesor de entorno servidor");
+			us2.setNumberOfPosts(1);
 			User us3 = new User("A123",encoder.encode("11111111"), "anda@host.com", "Ana", "Desarrolladora java interesada en astronomía");
+			us3.setNumberOfPosts(1);
 			repositorioUsuario.saveAll(Arrays.asList(us1,us2,us3));
 			
+			Post p1 = new Post("La astrología es increible", "Lorem ipsum dolor sit amet, consectetur adipiscing . Vestibulum at fermentum ipsum. Ut in leo eu nunc tincidunt "
+					+ "consectetur. Suspendisse imperdiet nisl sit  sapien aliquam iaculis. Nunc eget sem neque. Sed dui metus, volutpat et augue non, mollis scelerisque diam. "
+					+ "Suspendisse hendrerit lacinia lacus id eleifend. Aenean id velit , ullamcorper eros efficitur, tristique mauris. Suspendisse hendrerit eget velit non "
+					+ "dictum. Phasellus et dapibus mauris. Suspendisse tincidunt tortor mauris,  volutpat enim lacinia sed. In hac habitasse platea dictumst. Phasellus at orci "
+					+ "ligula. Etiam suscipit ut nulla at . Proin diam purus, viverra id urna nec, pellentesque facilisis ex.", us1);
+			Post p2 = new Post("Viajando por Europa para ver la aurora", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fermentum ipsum. Ut in leo eu nunc tincidunt "
+					+ "consectetur. Suspendisse imperdiet nisl sit amet sapien aliquam iaculis. Nunc eget sem neque. Sed dui metus, volutpat et augue non, mollis scelerisque diam. "
+					+ "Suspendisse hendrerit lacinia lacus id eleifend.  id velit semper, ullamcorper eros efficitur, tristique mauris. Suspendisse hendrerit eget velit non "
+					+ "dictum. Phasellus et dapibus mauris. Suspendisse tincidunt tortor mauris, vel volutpat enim lacinia sed. In hac habitasse platea dictumst. Phasellus at orci "
+					+ "ligula. Etiam suscipit ut nulla at ornare. Proin  purus, viverra id urna pellentesque facilisis ex.", us1);
+			Post p3 = new Post("¿Dónde puedo observar la lluvia de estrellas del 22 de Mayo?", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at fermentum ipsum. Ut in leo eu nunc tincidunt "
+					+ "consectetur. Suspendisse imperdiet nisl sit amet sapien  iaculis. Nunc eget sem neque. Sed dui metus, volutpat et augue non, mollis scelerisque diam. "
+					+ "Suspendisse hendrerit lacinia lacus id eleifend. Aenean id velit semper, ullamcorper eros efficitur, tristique mauris. Suspendisse hendrerit eget velit non "
+					+ "dictum. Phasellus et dapibus mauris. Suspendisse tincidunt tortor mauris, vel volutpat enim lacinia sed. In hac habitasse platea dictumst. Phasellus at orci "
+					+ "ligula. Etiam suscipit ut nulla at ornare. Proin diam purus, viverra id urna nec, pellentesque facilisis ex.", us2);
+			Post p4 = new Post("La NASA anuncia nuevos descubrimientos ¿Son interesantes?", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at fermentum ipsum. Ut in leo eu nunc tincidunt "
+					+ "consectetur. Suspendisse imperdiet nisl sit amet sapien aliquam iaculis. Nunc eget sem neque. Sed dui metus, volutpat et augue non, mollis scelerisque diam. "
+					+ "Suspendisse hendrerit lacinia lacus id eleifend. Aenean id velit semper, ullamcorper eros efficitur, tristique mauris. Suspendisse hendrerit eget velit non "
+					+ "dictum. Phasellus et dapibus mauris. Suspendisse tortor mauris, vel volutpat enim lacinia sed.  hac habitasse platea dictumst. Phasellus at orci "
+					+ "ligula. Etiam suscipit ut nulla at ornare. Proin diam purus, viverra id urna nec, pellentesque facilisis ex.", us3);
+			repositorioPost.saveAll(Arrays.asList(p1,p2,p3,p4));
 		};
 	}
 }

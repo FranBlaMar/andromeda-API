@@ -42,10 +42,10 @@ public class User {
 	private String aboutMe;
 	
 	@Column (name="numero_de_posts")
-	private Integer numberOfPosts;
+	private int numberOfPosts;
 	
 	@Column (name="numero_de_comentarios")
-	private Integer numberOfComents;
+	private int numberOfComents;
 	
 	public User(String userName,String password, String email, String name, String aboutMe){
 		this.userName = userName;

@@ -14,11 +14,17 @@ import org.springframework.stereotype.Component;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
+/**
+ * Servicio donde gestionamos la lógica de negocio de usuarios
+ * @author usuario
+ *
+ */
 @Component
 public class UsuarioService implements UserDetailsService {
 
     @Autowired private UserRepository repositorio;
 
+   
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> userRes = repositorio.findById(userName);
@@ -39,7 +45,6 @@ public class UsuarioService implements UserDetailsService {
     public User editUsuario(User usuarioModificado) {
     	User usuario = this.repositorio.findById(usuarioModificado.getUserName()).get();
     	usuarioModificado.setPassword(usuario.getPassword());
-    	System.out.println(usuarioModificado);
     	return this.repositorio.save(usuarioModificado);
     }
 }
