@@ -34,7 +34,7 @@ public class Post {
 	@Column (name="title", nullable = false, length = 100)
 	private String title;
 	
-	@Column (name="body", nullable = false,length = 3000)
+	@Column (name="body", nullable = false,length = 5000)
 	private String body;
 	
 	@ManyToOne

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Post;
@@ -43,6 +43,7 @@ public class PostController {
 	 */
 	@PostMapping("/post")
 	public Post setPost(@RequestBody Post postNuevo) {
+		System.out.println(postNuevo);
 		return this.servicio.crearPost(postNuevo);
 	}
 	
@@ -52,8 +53,8 @@ public class PostController {
 	 * @return Post obtenido mediante su id
 	 */
 	@GetMapping("/post/{idPost}")
-	public Post getPostById(@RequestParam Long id) {
-		return this.repositorio.findById(id).get();
+	public Post getPostById(@PathVariable Long idPost) {
+		return this.repositorio.findById(idPost).get();
 	}
 	
 	
@@ -64,7 +65,7 @@ public class PostController {
 	 * @return Post modificado
 	 */
 	@PutMapping("/post/{idPost}")
-	public Post modifyPost(@RequestBody Post postModify, @RequestParam Long idPost) {
+	public Post modifyPost(@RequestBody Post postModify, @PathVariable Long idPost) {
 		return this.servicio.modifyPost(postModify, idPost);
 	}
 
