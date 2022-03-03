@@ -11,11 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.model.ApartadoWiki;
+import com.example.demo.model.Comentario;
 import com.example.demo.model.InfoWiki;
 import com.example.demo.model.Noticia;
 import com.example.demo.model.Post;
 import com.example.demo.model.User;
 import com.example.demo.repository.ApartadoWikiRepository;
+import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.repository.NoticiaRepository;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.repository.UserRepository;
@@ -32,7 +34,7 @@ public class AndromedaApiApplication {
 
 	
 	@Bean
-	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia, UserRepository repositorioUsuario, PostRepository repositorioPost) {
+	CommandLineRunner initData(ApartadoWikiRepository repositorioApartado, NoticiaRepository repositorioNoticia, UserRepository repositorioUsuario, PostRepository repositorioPost, ComentarioRepository repositorioComentario) {
 		return args -> {
 			List<InfoWiki> infoPlanetas = Arrays.asList(
 					new InfoWiki("Planetas","Un planeta es un cuerpo celeste sin luz propia y de forma esférica que gira sobre sí mismo y comúnmente alrededor de una "
@@ -172,7 +174,13 @@ public class AndromedaApiApplication {
 					+ "Suspendisse hendrerit lacinia lacus id eleifend. Aenean id velit semper, ullamcorper eros efficitur, tristique mauris. Suspendisse hendrerit eget velit non "
 					+ "dictum. Phasellus et dapibus mauris. Suspendisse tortor mauris, vel volutpat enim lacinia sed.  hac habitasse platea dictumst. Phasellus at orci "
 					+ "ligula. Etiam suscipit ut nulla at ornare. Proin diam purus, viverra id urna nec, pellentesque facilisis ex.", us3);
+			Comentario c1 = new Comentario ("Buen post compañero, ojalá saber latín y entenderlo", us3);
+			Comentario c2 = new Comentario ("Jajajajajajajaja me encantó el segundo párrafo", us2);
+			p1.addComentario(c1);
+			p1.addComentario(c2);
 			repositorioPost.saveAll(Arrays.asList(p1,p2,p3,p4));
+			
+			 
 		};
 	}
 }
