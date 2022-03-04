@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.error.ComentarioNotFoundException;
+import com.example.demo.error.PostNotFoundException;
+import com.example.demo.model.Comentario;
 import com.example.demo.model.Post;
+import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.service.PostService;
 
@@ -24,6 +29,8 @@ public class PostController {
 
 	@Autowired
 	private PostRepository repositorio;
+	@Autowired
+	private ComentarioRepository repositorioComentario;
 	@Autowired
 	private PostService servicio;
 	
@@ -43,7 +50,6 @@ public class PostController {
 	 */
 	@PostMapping("/post")
 	public Post setPost(@RequestBody Post postNuevo) {
-		System.out.println(postNuevo);
 		return this.servicio.crearPost(postNuevo);
 	}
 	
@@ -51,10 +57,15 @@ public class PostController {
 	 * Método para obtener un post por su id
 	 * @param id
 	 * @return Post obtenido mediante su id
+	 * @throws PostNotFoundException
 	 */
 	@GetMapping("/post/{idPost}")
-	public Post getPostById(@PathVariable Long idPost) {
-		return this.repositorio.findById(idPost).get();
+	public Post getPostById(@PathVariable Long idPost) throws PostNotFoundException{
+		Post p = this.repositorio.findById(idPost).orElse(null);
+		if (p == null) {
+			throw new PostNotFoundException();
+		}
+		return p;
 	}
 	
 	
@@ -69,4 +80,101 @@ public class PostController {
 		return this.servicio.modifyPost(postModify, idPost);
 	}
 
+	
+
+	/**
+	 * Metodo para obtener todos los comentarios de un post
+	 * @param idPost id del post 
+	 * @return Todos los comentarios de un post
+	 * @throws PostNotFoundException
+	 */
+	@GetMapping("/post/{idPost}/comentario")
+	public List<Comentario> obtenerComentarios(@PathVariable Long idPost) throws PostNotFoundException{
+		Post post = this.repositorio.findById(idPost).orElse(null);
+		if(post == null) {
+			throw new PostNotFoundException();
+		}
+		return post.getComments();
+	}
+	
+
+	/**
+	 * Metodo para obtener un comentario mediante su id
+	 * @param idPost id del post
+	 * @param idComent id del comentario
+	 * @return comentario que se busca
+	 * @throws PostNotFoundException
+	 * @throws ComentarioNotFoundException
+	 */
+	@GetMapping("/post/{idPost}/comentario/{idComent}")
+	public Comentario obtenerComentarioPorId(@PathVariable Long idPost, @PathVariable Long idComent) throws PostNotFoundException, ComentarioNotFoundException{
+		Post post = this.repositorio.findById(idPost).orElse(null);
+		if(post == null) {
+			throw new PostNotFoundException();
+		}
+		Comentario comment = this.servicio.obtenerComentarioPorId(post, idComent);
+		if(comment == null) {
+			throw new ComentarioNotFoundException();
+		}
+		return comment;
+	}
+	
+	/**
+	 * Metodo para modificar un comentario
+	 * @param idPost id del post al que pertenece el comentario
+	 * @param idComent id del comentario que vamos a modificar
+	 * @param comentarioModificado Comentario ya modificado
+	 * @return El comentario modificado
+	 * @throws PostNotFoundException
+	 * @throws ComentarioNotFoundException
+	 */
+	@PutMapping("/post/{idPost}/comentario/{idComent}")
+	public Comentario modificarComentarioPorId(@PathVariable Long idPost, @PathVariable Long idComent, @RequestBody Comentario comentarioModificado) throws PostNotFoundException, ComentarioNotFoundException{
+		Post post = this.repositorio.findById(idPost).orElse(null);
+		if(post == null) {
+			throw new PostNotFoundException();
+		}
+		
+		return this.servicio.modifyComentario(post, idComent, comentarioModificado);
+	}
+	
+	/**
+	 * Metodo para eliminar un comentario
+	 * @param idPost id del post al que pertenece el comentario
+	 * @param idComent id del comentaio que deseamos borrar
+	 * @return El comentario borrado
+	 * @throws PostNotFoundException
+	 * @throws ComentarioNotFoundException
+	 */
+	@DeleteMapping("/post/{idPost}/comentario/{idComent}")
+	public Comentario eliminarComentarioPorId(@PathVariable Long idPost, @PathVariable Long idComent) throws PostNotFoundException, ComentarioNotFoundException{
+		Post post = this.repositorio.findById(idPost).orElse(null);
+		if(post == null) {
+			throw new PostNotFoundException();
+		}
+		Comentario comment = this.servicio.obtenerComentarioPorId(post, idComent);
+		if(comment == null) {
+			throw new ComentarioNotFoundException();
+		}
+		return this.servicio.eliminarComentario(comment);
+	}
+	
+	
+	
+	/**
+	 * Metodo para crear un comentario
+	 * @param idPost Id del psot al que pertenece el comentario
+	 * @param comentarioNuevo Comentario que vamos a añadir
+	 * @return COmentario añadido
+	 * @throws PostNotFoundException
+	 */
+	@PostMapping("/post/{idPost}/comentario")
+	public Comentario crearComentario(@PathVariable Long idPost, @RequestBody Comentario comentarioNuevo) throws PostNotFoundException{
+		Post post = this.repositorio.findById(idPost).orElse(null);
+		if(post == null) {
+			throw new PostNotFoundException();
+		}
+		return this.servicio.crearComentario(post, comentarioNuevo);
+	}
+	
 }
