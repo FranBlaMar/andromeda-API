@@ -31,6 +31,7 @@ public class FiltroJWT extends OncePerRequestFilter {
             String jwt = authHeader.substring(7);
             if(jwt == null || jwt.isBlank()){
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Token inválido");
+                return;
             }else {
                 try{
                     String userName = jwtUtil.validateTokenAndRetrieveSubject(jwt);
@@ -42,6 +43,7 @@ public class FiltroJWT extends OncePerRequestFilter {
                     }
                 }catch(JWTVerificationException exc){
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Token inválido");
+                    return;
                 }
             }
         }

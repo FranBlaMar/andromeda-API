@@ -87,8 +87,12 @@ public class PostService {
 	 * @param comentarioAEliminar Comentario que deseamos eliminar
 	 * @return Comentario Eliminado
 	 */
-	public Comentario eliminarComentario(Comentario comentarioAEliminar) {
-		this.repositorioComentario.delete(comentarioAEliminar);
+	public Comentario eliminarComentario(Post post, Comentario comentarioAEliminar) {
+		post.getComments().remove(comentarioAEliminar);
+		User user = comentarioAEliminar.getAuthor();
+		user.setNumberOfComents(user.getNumberOfComents()-1);
+		this.servicioUsuario.editUsuario(user);
+		this.repository.save(post);
 		return comentarioAEliminar;
 	}
 	

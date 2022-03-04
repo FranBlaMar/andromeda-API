@@ -156,7 +156,7 @@ public class PostController {
 		if(comment == null) {
 			throw new ComentarioNotFoundException();
 		}
-		return this.servicio.eliminarComentario(comment);
+		return this.servicio.eliminarComentario(post, comment);
 	}
 	
 	

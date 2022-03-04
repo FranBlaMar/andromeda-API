@@ -150,8 +150,10 @@ public class AndromedaApiApplication {
 			us1.setNumberOfPosts(2);
 			User us2 = new User("J123",encoder.encode("11111111"), "jorge@host.com", "Jorge", "Profesor de entorno servidor");
 			us2.setNumberOfPosts(1);
+			us2.setNumberOfComents(1);
 			User us3 = new User("A123",encoder.encode("11111111"), "anda@host.com", "Ana", "Desarrolladora java interesada en astronomía");
 			us3.setNumberOfPosts(1);
+			us3.setNumberOfComents(1);
 			repositorioUsuario.saveAll(Arrays.asList(us1,us2,us3));
 			
 			Post p1 = new Post("La astrología es increible", "Lorem ipsum dolor sit amet, consectetur adipiscing . Vestibulum at fermentum ipsum. Ut in leo eu nunc tincidunt "
