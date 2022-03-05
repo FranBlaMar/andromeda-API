@@ -15,7 +15,7 @@ public class CorsConfig{
 	            @Override
 	            public void addCorsMappings(CorsRegistry registry) {
 	                registry.addMapping("/**")
-	                .allowedOrigins("https://franblamar.github.io/Andromeda")
+	                .allowedOrigins("https://franblamar.github.io")
 	                .allowedMethods("GET","POST", "PUT", "DELETE");
 
 	            }
