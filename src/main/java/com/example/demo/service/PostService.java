@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Comentario;
 import com.example.demo.model.Post;
 import com.example.demo.model.User;
-import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.repository.PostRepository;
 
 /**
@@ -21,8 +20,7 @@ public class PostService {
 
 	@Autowired
 	private PostRepository repository;
-	@Autowired
-	private ComentarioRepository repositorioComentario;
+
 	@Autowired
 	private UsuarioService servicioUsuario;
 	

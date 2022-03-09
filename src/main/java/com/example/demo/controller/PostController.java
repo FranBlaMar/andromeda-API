@@ -15,7 +15,6 @@ import com.example.demo.error.ComentarioNotFoundException;
 import com.example.demo.error.PostNotFoundException;
 import com.example.demo.model.Comentario;
 import com.example.demo.model.Post;
-import com.example.demo.repository.ComentarioRepository;
 import com.example.demo.repository.PostRepository;
 import com.example.demo.service.PostService;
 
@@ -29,8 +28,6 @@ public class PostController {
 
 	@Autowired
 	private PostRepository repositorio;
-	@Autowired
-	private ComentarioRepository repositorioComentario;
 	@Autowired
 	private PostService servicio;
 	

@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -126,6 +127,21 @@ public class UserController {
 	    public User getUser(){ 	
 	        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        return repository.findById(userName).get();
+	    }
+	    
+	    /**
+	     * Metodo para obtener un usuario por userName, para comprobación reactiva del formulario de registor
+	     * @param userName nombre de usuario
+	     * @return el usuario encontrado o null
+	     * @throws UsuarioNotFoundException
+	     */
+	    @GetMapping("/user/{userName}")
+	    public User getUserPorUserName(@PathVariable String userName) throws UsuarioNotFoundException{ 	
+	        User resultado = repository.findById(userName).get();
+	        if(resultado == null) {
+	        	 throw new UsuarioNotFoundException();
+	        }
+	        return resultado;
 	    }
 	    
 	    /**
