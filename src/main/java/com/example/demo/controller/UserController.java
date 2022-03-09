@@ -135,7 +135,7 @@ public class UserController {
 	     * @return el usuario encontrado o null
 	     * @throws UsuarioNotFoundException
 	     */
-	    @GetMapping("/user/{userName}")
+	    @GetMapping("/auth/{userName}")
 	    public User getUserPorUserName(@PathVariable String userName) throws UsuarioNotFoundException{ 	
 	        User resultado = repository.findById(userName).get();
 	        if(resultado == null) {
